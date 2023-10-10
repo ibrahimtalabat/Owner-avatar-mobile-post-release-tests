@@ -1,0 +1,15 @@
+#Pre Cases: Login .yaml 
+#Search in More Shops (iOS)
+
+appId: com.6alabat.cuisineApp
+
+
+---
+- runFlow: "ios-login-location.yaml"
+- extendedWaitUntil:
+    visible: "More shops"
+    timeout: 10000 
+- tapOn: "More shops"
+    
+- waitForAnimationToEnd
+- assertVisible: "Shop by store type"
