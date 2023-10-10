@@ -1,0 +1,99 @@
+appId: com.6alabat.cuisineApp
+
+env:
+    AreaName: "Hatta"
+    RestaurantName: " Lafarina Pizza"
+    CuisineName: "Pizza"
+
+---
+#fresh state of the app
+
+- runFlow: "ios-login-flow.yaml"
+- tapOn: ${AreaName}
+- waitForAnimationToEnd
+
+- tapOn: "Food"
+- waitForAnimationToEnd
+- runFlow:
+    when:
+      visible:
+        id: "arrowExpandGreen"
+    commands:
+        - tapOn:
+            id: "arrowExpandGreen"
+- waitForAnimationToEnd
+
+- tapOn: "Cuisines"
+- tapOn: "Clear all"
+- scrollUntilVisible:
+    element:
+      text: ${CuisineName}
+    direction: DOWN
+    timeout: 20000
+    speed: 10
+    visibilityPercentage: 100
+- tapOn: ${CuisineName}
+- tapOn: .*Apply.*
+- waitForAnimationToEnd
+
+
+- tapOn: .*​L​a​f​a​r​i​n​a​ ​P​i​z​z​a​
+         Pizza, Pasta, Italian.*
+- runFlow:
+    when:
+      visible:
+        text: "Continue ordering"
+    commands:
+        - tapOn:
+            text: "Continue ordering"
+- waitForAnimationToEnd
+- tapOn: .*tab_item_Soup.*
+- tapOn: .*Broccoli Soup.*
+- tapOn: "increase"
+- tapOn: "increase"
+- tapOn:
+    text: .*Add to basket.*
+   
+# add item to basket
+
+- waitForAnimationToEnd
+- runFlow:
+    when:
+      notVisible:
+        text: .*gem_view_basket.*
+    commands:
+        - tapOn:
+            text: .*View basket.*
+
+- runFlow:
+    when:
+      visible:
+        text: .*gem_view_basket.*
+    commands:
+        - tapOn:
+            text: .*gem_view_basket.*
+
+
+- runFlow:
+    when:
+      notVisible: "No results found"
+    commands:
+        - tapOn:
+            text: "Checkout"
+        - assertVisible: "Checkout"
+
+- runFlow:
+    when:
+      visible: "No results found"
+    commands:
+        - tapOn:
+            text: "View all similar restaurants"
+
+
+
+
+
+
+
+
+

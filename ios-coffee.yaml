@@ -1,0 +1,40 @@
+#Verify Coffee vertical is shown in Home 
+#Verify user can sort vendors 
+#Verify user can navigate to 1st vendor 
+
+appId: com.6alabat.cuisineApp
+---
+
+- runFlow: "ios-login-location.yaml"
+- extendedWaitUntil:
+    visible: 
+       text: "Coffee"
+    timeout: 10000   
+- waitForAnimationToEnd
+- tapOn: "Coffee"
+- waitForAnimationToEnd
+- assertVisible: "Sort by"
+- tapOn: "Sort by"
+- tapOn: "A to Z"
+- tapOn: "Apply"
+- waitForAnimationToEnd
+- tapOn:
+    point: "50%,37%"
+- waitForAnimationToEnd
+- assertVisible: "packages/design_system/lib/assets/images/ds_search/ds_search.svg"
+- assertVisible: "menu_tab
+
+    menu_categories_icon
+
+    packages/design_system/lib/assets/images/ds_menu/ds_menu.svg"
+- assertVisible: "ds_button_price
+
+    0
+
+    1
+
+    +
+
+    View basket
+
+    AED 0.00"

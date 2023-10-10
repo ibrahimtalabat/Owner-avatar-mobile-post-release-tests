@@ -1,0 +1,88 @@
+#Search items in grocery home 
+#Add items to cart 
+#verify Cart
+#comment
+appId: com.6alabat.cuisineApp
+env:
+    item: " Nescafe"
+---
+- runFlow: "ios-login-location.yaml"
+- extendedWaitUntil:
+    visible: 
+       text: "Groceries"
+    timeout: 10000   
+- waitForAnimationToEnd
+- tapOn: "Groceries"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: 
+       text: "Shop by store type"
+    timeout: 10000
+- runFlow:
+    when:
+      notVisible: "Search for products or stores"
+    commands:
+        - tapOn:
+            point: "93%,8%"
+        - waitForAnimationToEnd
+        - tapOn: "Search for products or stores"
+        - waitForAnimationToEnd
+        - tapOn:
+            point: "55%,9%"
+        - tapOn:
+            point: "55%,9%"
+        - inputText: "Nescafe"
+        - waitForAnimationToEnd
+        - pressKey: Enter
+        - waitForAnimationToEnd
+        - assertVisible: .*\nAED .*
+        - tapOn:
+            point: "20%,39%"
+        - tapOn:
+            point: "20%,39%"
+        - tapOn:
+            id: "cart.add.button"
+        - tapOn: "ds plus"
+        - tapOn:
+            id: "ds-bag-filled"
+        - waitForAnimationToEnd
+        - tapOn:
+            id: "darkstore.cart.container"
+        - waitForAnimationToEnd
+        - assertVisible:
+            text: "Checkout"
+            enabled: true
+        - assertVisible: "Total amount"        
+
+- runFlow:
+    when:
+      visible: "Search for products or stores"
+    commands:
+        - tapOn: "Search for products or stores"
+        - tapOn:
+            point: "55%,9%"
+        - tapOn:
+            point: "55%,9%"
+        - waitForAnimationToEnd
+        - inputText: "Nescafe"
+        - waitForAnimationToEnd
+        - pressKey: Enter
+        - waitForAnimationToEnd
+        - assertVisible: .*\nAED .*
+        - tapOn:
+            point: "20%,39%"
+        - tapOn:
+            point: "20%,39%"
+        - tapOn:
+            id: "cart.add.button"
+        - tapOn: "ds plus"
+        - tapOn:
+            id: "ds-bag-filled"
+        - waitForAnimationToEnd
+        - tapOn:
+            id: "darkstore.cart.container"
+        - waitForAnimationToEnd
+        - assertVisible:
+            text: "Checkout"
+            enabled: true
+        - assertVisible: "Total amount"    

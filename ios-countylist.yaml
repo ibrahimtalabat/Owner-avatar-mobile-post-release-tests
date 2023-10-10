@@ -1,0 +1,28 @@
+appId: com.6alabat.cuisineApp
+
+
+#fresh state of the app
+---
+- launchApp:
+          clearState: true
+          clearKeychain: true
+          permissions: { all: deny }
+
+- extendedWaitUntil:
+    visible: 
+       text: "Continue"
+    timeout: 20000
+- tapOn:
+    id: "LocationOnboarding.continueLocation"
+- waitForAnimationToEnd
+- assertVisible: "Kuwait"
+- assertVisible: "KSA"
+- assertVisible: "Bahrain"
+- assertVisible: "UAE"
+- assertVisible: "Oman"
+- assertVisible: "Qatar"
+- assertVisible: "Jordan"
+- assertVisible: "Egypt"
+- assertVisible: "Iraq"
+
+

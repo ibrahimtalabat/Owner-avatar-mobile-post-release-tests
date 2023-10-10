@@ -1,0 +1,46 @@
+#location with location set to business bay
+appId: com.6alabat.cuisineApp
+
+env:
+    Email: "prodbuild@gmail.com"
+    Password: "123456"
+---
+- launchApp:
+          clearState: true
+          clearKeychain: true
+          permissions: { all: deny }
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: "Continue"
+    timeout: 30000 
+- waitForAnimationToEnd
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "UAE"
+    timeout: 10000 
+- tapOn: "UAE"
+- waitForAnimationToEnd
+- tapOn: "Cancel"
+- tapOn: "back"
+- extendedWaitUntil:
+    visible: "Sign up"
+    timeout: 10000 
+- tapOn: "Sign up"
+- extendedWaitUntil:
+    visible: "Continue with email"
+
+- tapOn: "Continue with email"
+- tapOn:
+    id: "LoginFieldsView.emailTextField"
+- inputText: ${Email}
+- tapOn:
+    id: "LoginFieldsView.passwordTextField"
+- inputText: ${Password}
+- tapOn: "Log in"
+- waitForAnimationToEnd
+#- tapOn: "Select Your Area"
+- extendedWaitUntil:
+    visible: "Choose delivery location"
+    timeout: 10000 
+- tapOn: "Business bay"
+- waitForAnimationToEnd

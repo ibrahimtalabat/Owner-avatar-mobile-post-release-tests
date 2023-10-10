@@ -1,0 +1,49 @@
+#location with location set to business bay
+appId: com.6alabat.cuisineApp
+
+env:
+    Email: "tprotest3@gmail.com"
+    Password: "tprotest2022" 
+---
+- launchApp:
+          clearState: true
+          clearKeychain: true
+          permissions: { all: deny }
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: "Continue"
+    timeout: 20000 
+- waitForAnimationToEnd
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible: "UAE"
+    timeout: 10000 
+- tapOn: "UAE"
+- waitForAnimationToEnd
+- tapOn: "Cancel"
+- tapOn: "back"
+- extendedWaitUntil:
+    visible: "Sign up"
+   
+- tapOn: "Sign up"
+- extendedWaitUntil:
+    visible: "Continue with email"
+
+- tapOn: "Continue with email"
+- tapOn:
+    id: "LoginFieldsView.emailTextField"
+- inputText: ${Email}
+- tapOn:
+    id: "LoginFieldsView.passwordTextField"
+- inputText: ${Password}
+- tapOn:
+    id: "LoginFieldsView.loginButton"
+
+#- tapOn: "Select Your Area"
+- extendedWaitUntil:
+    visible: "Choose delivery location"
+    timeout: 10000 
+
+- tapOn:
+    point: "50%,23%"
+

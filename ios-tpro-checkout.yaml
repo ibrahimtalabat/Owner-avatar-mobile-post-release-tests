@@ -1,0 +1,57 @@
+ #add 4 items to exceed MOV and process to checkout
+ #choose cash payment and verify order place button is activated and assert total amount
+appId: com.6alabat.cuisineApp
+env:
+    item: " Nescafe"
+---
+- runFlow: "ios-login-location.yaml"
+- extendedWaitUntil:
+    visible: 
+       text: "talabat mart"
+    timeout: 10000   
+
+- tapOn: "talabat mart" 
+- waitForAnimationToEnd
+- assertVisible: "Get free delivery with pro"
+- tapOn: "Search products"
+- extendedWaitUntil:
+     visible: 
+        text: "Search products"
+     timeout: 10000  
+- tapOn: "Search products"
+- waitForAnimationToEnd
+#- inputText: ${item}
+- inputText: "Nescafe"
+- waitForAnimationToEnd
+- pressKey: Enter
+- assertVisible: "qcommerce.cart.increment.button"
+- tapOn:
+     point: "26%,38%"
+- tapOn:
+     id: "cart.add.button"
+- repeat:
+     times: 3
+     commands:
+       - tapOn: "ds plus"
+- tapOn:
+     id: "ds-bag-filled"
+- assertVisible:
+     text: "Checkout"
+     enabled: true
+# - assertVisible: "Total amount"
+
+# - tapOn: "Checkout"
+# - waitForAnimationToEnd
+# - extendedWaitUntil:
+#     visible: 
+#        text: "Cash"
+#     timeout: 10000   
+# - tapOn: "Cash"
+# - scrollUntilVisible:
+#      element:
+#        text: "Total amount"
+#      direction: DOWN 
+#      timeout: 10000 
+#      speed: 40 
+#      visibilityPercentage: 100 
+# - assertVisible: "Total amount"

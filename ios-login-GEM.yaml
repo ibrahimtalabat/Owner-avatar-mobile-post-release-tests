@@ -1,0 +1,55 @@
+#location with location set to business bay
+appId: com.6alabat.cuisineApp
+
+env:
+    Email: "ikhaleel@talabat.com"
+    Password: "Hi0047t!"
+---
+- launchApp:
+          clearState: true
+          clearKeychain: true
+          permissions: { all: deny }
+
+- assertVisible: "Continue"
+- tapOn: "Continue"
+
+- extendedWaitUntil:
+    visible: "UAE"
+    timeout: 10000 
+- tapOn: "UAE"
+- tapOn: "Cancel"
+- tapOn: "back"
+- extendedWaitUntil:
+    visible: "Sign up"
+   
+- tapOn: "Sign up"
+- extendedWaitUntil:
+    visible: "Continue with email"
+
+- tapOn: "Continue with email"
+- tapOn:
+    id: "LoginFieldsView.emailTextField"
+- inputText: ${Email}
+- tapOn:
+    id: "LoginFieldsView.passwordTextField"
+- inputText: ${Password}
+- tapOn: "Log in"
+- waitForAnimationToEnd
+#- tapOn: "Select Your Area"
+- extendedWaitUntil:
+    visible: "Choose delivery location"
+    timeout: 10000 
+- tapOn: "TalabatHQ"
+
+- extendedWaitUntil:
+    visible: 
+       text: "Food"
+    timeout: 10000   
+- waitForAnimationToEnd
+
+
+
+
+
+
+

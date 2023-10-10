@@ -1,0 +1,44 @@
+appId: com.6alabat.cuisineApp
+env:
+    vendor: "Puzatic restaurant"
+---
+- runFlow: "ios-login-location.yaml"
+- tapOn:
+    id: "selectAreaLabel"
+- extendedWaitUntil:
+    visible: "Choose delivery location"
+    timeout: 10000 
+- tapOn: "Dubai Central"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: 
+       text: "Pickup"
+    timeout: 10000  
+
+- tapOn: "Pickup"
+- waitForAnimationToEnd
+- tapOn:
+    point: "50%,48%"
+- waitForAnimationToEnd
+- runFlow:
+    when:
+      visible:
+        text: "Continue"
+    commands:
+        - tapOn:
+            text: "Continue"
+- waitForAnimationToEnd
+- runFlow:
+    when:
+      visible:
+        text: "I'll pick it up"
+    commands:
+        - tapOn:
+            text: "I'll pick it up"
+- waitForAnimationToEnd
+- assertVisible: "packages/design_system/lib/assets/images/ds_search/ds_search.svg"
+- tapOn: "packages/design_system/lib/assets/images/ds_search/ds_search.svg"
+- assertVisible: "Search menu items"
+- tapOn: "Search menu items"
+- inputText: "water"
+- pressKey: Enter

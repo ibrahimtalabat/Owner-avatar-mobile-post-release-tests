@@ -1,0 +1,63 @@
+appId: com.6alabat.cuisineApp
+---
+- runFlow: "ios-login-location.yaml"
+
+- extendedWaitUntil:
+    visible: "Health & beauty"
+    timeout: 10000 
+- waitForAnimationToEnd
+- tapOn:  "Health & beauty"
+
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: "All stores"
+    timeout: 10000 
+- tapOn:
+    id: "search.buttonView"
+    index: 1
+- tapOn: "Search for products or stores"
+- tapOn:
+    point: "55%,9%"
+- waitForAnimationToEnd
+- inputText: "aster ph"
+- pressKey: Enter
+- tapOn: "Stores"
+- waitForAnimationToEnd
+- tapOn: "Restaurant logo"
+- waitForAnimationToEnd
+- tapOn: "Top Savers"
+- waitForAnimationToEnd
+- tapOn:
+    below: "All"
+    index: 1 
+- waitForAnimationToEnd
+- repeat:
+    times: 4
+    commands:
+      - tapOn:
+          id: "cart.add.button"
+
+- waitForAnimationToEnd
+- tapOn:
+    id: "showCartNewID"
+- waitForAnimationToEnd
+- assertVisible: "Checkout"
+- tapOn: "Checkout"
+- waitForAnimationToEnd
+- tapOn: "Cash"
+- scrollUntilVisible:
+     element:
+       text: "Total amount"
+     direction: DOWN 
+     timeout: 10000 
+     speed: 40 
+     visibilityPercentage: 100 
+- assertVisible: "Total amount"
+- assertVisible: "Delivery fee"
+    
+
+
+    
+
+
+

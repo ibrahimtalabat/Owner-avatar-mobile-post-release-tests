@@ -1,0 +1,68 @@
+appId: com.6alabat.cuisineApp
+
+env:
+    AreaName: DFC
+    SearchVendor: "Grow"
+
+#fresh state of the app
+---
+- runFlow: "ios-login-flow.yaml"
+# area selection
+- waitForAnimationToEnd
+- tapOn: ${AreaName}
+
+
+# home search food vendor
+- tapOn:
+    id: "HomeViewController.SearchButton"
+- waitForAnimationToEnd
+- tapOn:
+    text: .*Search food.*
+- inputText: ${SearchVendor}
+- pressKey: Enter
+- waitForAnimationToEnd
+- tapOn: 
+    text: .*​G​r​o​w​
+          Healthy, Sandwiches, Specialty Store, Burgers.*
+- runFlow:
+    when:
+      visible:
+        text: "Continue"
+    commands:
+        - tapOn:
+            text: "Continue"
+- waitForAnimationToEnd
+- tapOn: .*tab_item_Breakfast.*
+- tapOn: .*tab_item_Breakfast
+          Breakfast.*
+- tapOn: .*Club Sandwich.*
+- tapOn: "increase"
+- tapOn: "increase"
+- tapOn:
+    text: .*Add to basket.*
+   
+# add item to basket
+
+- waitForAnimationToEnd
+- runFlow:
+    when:
+      notVisible:
+        text: .*gem_view_basket.*
+    commands:
+        - tapOn:
+            text: .*View basket.*
+
+- runFlow:
+    when:
+      visible:
+        text: .*gem_view_basket.*
+    commands:
+        - tapOn:
+            text: .*gem_view_basket.*
+
+- waitForAnimationToEnd
+
+- tapOn: "Checkout"
+- assertVisible: "Checkout"
+
+

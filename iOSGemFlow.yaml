@@ -1,0 +1,47 @@
+appId: com.6alabat.cuisineApp
+
+---
+- runFlow: "ios-login-GEM.yaml"
+- extendedWaitUntil:
+    visible: 
+       text: "Food"
+    timeout: 10000
+
+- tapOn: "Food"
+- waitForAnimationToEnd
+
+- runFlow:
+    when:
+      visible:
+         id: "Gem.Button.Minimize"
+    commands:
+        
+        - extendedWaitUntil:
+           visible: 
+              text: "Save up to AED 30"
+           timeout: 10000
+        - waitForAnimationToEnd      
+        - tapOn:
+            id: "arrowExpandGreen"
+        
+        - extendedWaitUntil:
+           visible: 
+              text: "Delivery\nTab 1 of 2"
+           timeout: 10000 
+        - tapOn:
+            point: "50%,91%"
+        - waitForAnimationToEnd        
+        - tapOn:
+            id: "GemVendorlistCell"
+        - waitForAnimationToEnd
+        - tapOn: "packages/design_system/lib/assets/images/ds_arrow_back/ds_arrow_back.svg"
+        - waitForAnimationToEnd
+        - tapOn:
+            id: "arrowExpandGreen"
+
+- runFlow:
+    when:
+      notVisible:
+         id: "Gem.Button.Minimize"
+    commands:
+        - assertVisible: "​A​l​l​ ​r​e​s​t​a​u​r​a​n​t​s​"   

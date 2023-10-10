@@ -1,0 +1,46 @@
+appId: com.6alabat.cuisineApp
+
+env:
+    AreaName: "DFC"
+    SearchVendor: Grow
+
+#fresh state of the app
+---
+- runFlow: "ios-login-flow.yaml"
+- tapOn: ${AreaName}
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: 
+       text: "Food"
+    timeout: 10000   
+
+- tapOn: "Food"
+- waitForAnimationToEnd
+- runFlow:
+    when:
+      visible:
+        id: "arrowExpandGreen"
+    commands:
+        - tapOn:
+            id: "arrowExpandGreen"
+- waitForAnimationToEnd
+- assertVisible: "Sort by"
+- tapOn: "Sort by"
+- tapOn: "A to Z"
+- tapOn: "Apply"
+- waitForAnimationToEnd
+- tapOn:
+    point: "93%,10%"
+- waitForAnimationToEnd
+- tapOn:
+    point: "93%,10%"
+
+# - tapOn:
+#     point: "55%,10%"
+# - tapOn: .*Search.*
+# - inputText: "Grow"
+# - pressKey: Enter
+# - waitForAnimationToEnd
+# - tapOn: 
+#      text: .*​G​r​o​w​
+#            Healthy, Sandwiches, Specialty Store, Burgers.*

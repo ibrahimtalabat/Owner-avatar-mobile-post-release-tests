@@ -1,0 +1,103 @@
+appId: com.6alabat.cuisineApp
+
+env:
+    Email: junliv@gmail.com
+    Password: Test1234
+    SearchVendor: Grow
+    AreaName: DFC
+
+#fresh state of the app
+---
+- launchApp:
+          clearState: true
+          clearKeychain: true
+          permissions: { all: deny }
+
+
+- extendedWaitUntil:
+    visible: 
+       text: "Continue"
+    timeout: 20000
+- tapOn:
+    id: "LocationOnboarding.continueLocation"
+- tapOn: "UAE"
+- waitForAnimationToEnd
+- tapOn: .*Search for your address.*
+- tapOn: .*Search for your address.*
+- inputText: ${AreaName}
+- tapOn: "Dubai Festival City"
+- waitForAnimationToEnd
+- tapOn: "Confirm pin location"
+
+# home search food vendor
+- tapOn:
+    id: "HomeViewController.SearchButton"
+- waitForAnimationToEnd
+- tapOn:
+    text: .*Search food.*
+- inputText: ${SearchVendor}
+- pressKey: Enter
+- waitForAnimationToEnd
+- tapOn: 
+    text: .*​G​r​o​w​
+          Healthy, Sandwiches, Specialty Store, Burgers.*
+
+- runFlow:
+    when:
+      visible:
+        text: "Continue ordering"
+    commands:
+        - tapOn:
+            text: "Continue ordering"
+- waitForAnimationToEnd
+- tapOn: .*tab_item_Breakfast.*
+- tapOn: .*Club Sandwich.*
+- tapOn: "increase"
+- tapOn: "increase"
+- tapOn:
+    text: .*Add to basket.*
+   
+# add item to basket
+
+- waitForAnimationToEnd
+- runFlow:
+    when:
+      notVisible:
+        text: .*gem_view_basket.*
+    commands:
+        - tapOn:
+            text: .*View basket.*
+
+- runFlow:
+    when:
+      visible:
+        text: .*gem_view_basket.*
+    commands:
+        - tapOn:
+            text: .*gem_view_basket.*
+
+- waitForAnimationToEnd
+
+- runFlow:
+    when:
+      notVisible: "No result found"
+    commands:
+        - tapOn:
+            text: "Checkout"
+        - tapOn: "Continue with email"
+        - tapOn: 
+            id: "LoginFieldsView.passwordTextField"
+        - inputText: ${Password}
+        - tapOn:
+            id: "LoginFieldsView.emailTextField"
+        - inputText: ${Email}
+        - tapOn: 
+            id: "LoginFieldsView.loginButton"
+        - assertVisible: "Checkout"
+
+- runFlow:
+    when:
+      visible: "No result found"
+    commands:
+        - tapOn:
+            text: "View all similar restaurants"

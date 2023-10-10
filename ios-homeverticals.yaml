@@ -1,0 +1,29 @@
+appId: com.6alabat.cuisineApp
+
+env:
+    AreaName: CityWalk
+
+---
+#navigation of home vertical launchers
+- runFlow: "ios-login-flow.yaml"
+- tapOn: ${AreaName}
+
+- waitForAnimationToEnd
+
+- assertVisible: "Food"
+
+- assertVisible: "talabat mart"
+
+- assertVisible: "Groceries"
+
+- assertVisible: "Health & beauty"
+
+- assertVisible: "Flowers"
+
+- assertVisible: "Pickup"
+
+- assertVisible: "Coffee"
+
+- assertVisible: "More shops"
+
+
